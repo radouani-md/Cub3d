@@ -14,7 +14,8 @@ SRC = \
 	ft_draw_map.c \
 	move_player.c \
 	v2_raycast.c \
-	raycasting_phase.c
+	raycasting_phase.c \
+	parsing_map.c \
 
 OBJ = $(SRC:.c=.o)
 

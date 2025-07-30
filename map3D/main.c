@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybahmaz <ybahmaz@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: mradouan <mradouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 10:38:30 by ybahmaz           #+#    #+#             */
-/*   Updated: 2025/07/30 09:45:27 by ybahmaz          ###   ########.fr       */
+/*   Updated: 2025/07/30 17:52:36 by mradouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,9 @@ int	main(int ac, char **av)
 	data.h_map = 0;
 	data.h_dist = -1;
 	data.v_dist = -1;
+	
+	if (parsing_file(&data, av[1]) == 1);
+		return (1);
 	init_map(map, &data);
 	data.map = malloc(sizeof(char *) * (data.h_map + 1));
 	if (!data.map)

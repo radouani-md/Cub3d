@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybahmaz <ybahmaz@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: mradouan <mradouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 10:32:05 by ybahmaz           #+#    #+#             */
-/*   Updated: 2025/07/30 14:56:05 by ybahmaz          ###   ########.fr       */
+/*   Updated: 2025/07/30 19:48:27 by mradouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,12 @@ typedef struct s_data
 	char		**map;
 	int			w_map;
 	int			h_map;
+	char		*no_map;
+	char		*so_map;
+	char		*we_map;
+	char		*ea_map;
+	char		*f_color;
+	char		*c_color;
 	int			add_x;
 	int			add_y;
 	float		h_dist;
@@ -98,4 +104,11 @@ void	raycasting_phase(t_data *data, t_player *player, float angle);
 void	v2_raycast(t_data *data, t_player *player, float angle);
 void	ft_put_pixel(t_image *image, int color, int x, int y);
 float	normalize_angle(float angle);
+
+//                         MOHA FUNCTIONS
+
+int	parsing_file(t_data *data, char file_name);
+int	md_strncmp(const char *s1, const char *s2, size_t n);
+int	md_strchr(const char *s, int c);
+
 #endif
