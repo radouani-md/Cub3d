@@ -16,6 +16,7 @@ SRC = \
 	v2_raycast.c \
 	raycasting_phase.c \
 	parsing_map.c \
+	free_resourses.c \
 
 OBJ = $(SRC:.c=.o)
 

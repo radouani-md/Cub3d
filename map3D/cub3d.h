@@ -107,8 +107,9 @@ float	normalize_angle(float angle);
 
 //                         MOHA FUNCTIONS
 
-int	parsing_file(t_data *data, char file_name);
-int	md_strncmp(const char *s1, const char *s2, size_t n);
-int	md_strchr(const char *s, int c);
+int		parsing_file(t_data *data, char file_name);
+int		md_strncmp(const char *s1, const char *s2, size_t n);
+int		md_strchr(const char *s, int c);
+void	free_str(char **str);
 
 #endif

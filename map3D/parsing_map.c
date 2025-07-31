@@ -77,7 +77,9 @@ int	load_file(t_data *data, int fd)
 
 	if (count_width_height(data) == 1)
 		return (1);
-	// countinue Loading file after I claim the height and width
+	data->map = malloc((data->h_map + 1) * sizeof(char *));
+	if (!data->map)
+		return(perror("Error\n"), 1);
 	i = 0;
 	while (1)
 	{
@@ -104,7 +106,7 @@ int	load_file(t_data *data, int fd)
 		}
 	}
 	if (!data->no_map || !data->so_map || !data->we_map || !data->ea_map || !data->f_color || !data->c_color)
-		return (write(2, "Error\nNeed more categories\n", 27), 1);
+		return (free_str(data->map), write(2, "Error\nNeed more categories\n", 27), 1);
     return 0;
 }
 
