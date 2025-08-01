@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   v2_raycast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mradouan <mradouan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybahmaz <ybahmaz@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 17:02:17 by ybahmaz           #+#    #+#             */
-/*   Updated: 2025/07/30 15:38:07 by mradouan         ###   ########.fr       */
+/*   Updated: 2025/07/31 13:12:08 by ybahmaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void	v2_raycast(t_data *data, t_player *player, float angle)
 		player->rayFaceRight = !player->rayFaceLeft;
 		get_horizontal_dist(data, ray_angle, player);
 		get_vertical_dist(data, ray_angle, player);
+		// if (data->h_dist < data->v_dist || fabsf(data->h_dist - data->v_dist) < 0.01)
 		if (data->h_dist < data->v_dist)
 		{
 			if (player->rayFaceUp)
@@ -120,7 +121,6 @@ void	v2_raycast(t_data *data, t_player *player, float angle)
 			else
 				data->color[i] = 0x9E0E0E;	//!	red
 			min_dist = data->h_dist;
-			// data->dist_rays[i] = data->h_dist;
 		}
 		else
 		{
@@ -129,7 +129,6 @@ void	v2_raycast(t_data *data, t_player *player, float angle)
 			else
 				data->color[i] = 0x6C00C2;	//~ purple
 			min_dist = data->v_dist;
-			// data->dist_rays[i] = data->v_dist;
 		}
 		//?	Handle Fish-eye
 		data->dist_rays[i] = cosf(ray_angle - atan2f(player->dir.y, player->dir.x)) * min_dist;

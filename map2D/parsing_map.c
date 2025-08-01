@@ -6,7 +6,7 @@
 /*   By: mradouan <mradouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 16:02:38 by mradouan          #+#    #+#             */
-/*   Updated: 2025/08/01 10:18:28 by mradouan         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:42:44 by mradouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,84 +70,6 @@ int count_width_height(t_data *data)
 	return(0);  
 }
 
-char	*parse_direction(char *line)
-{
-	int i;
-	char *result;
-	
-	i = 2;
-	if (!md_strncmp(line, "NO", 2) || !md_strncmp(line, "SO", 2)
-		|| !md_strncmp(line, "WE", 2) || !md_strncmp(line, "EA", 2))
-	{
-		while (line[i])
-		{
-			if (md_isdigit(line[i]) || md_isalpha(line[i]))
-				break ;
-			i++;
-		}
-	}
-	result = ft_strdup(line + i);
-	return (result);
-}
-
-int	convert_to_hex(char *str)
-{
-	int	r_color;
-	int	g_color;
-	int	b_color;
-	char **rgb;
-
-	rgb = md_split(str, ',');
-	r_color = md_atoi(rgb[0]);
-	g_color = md_atoi(rgb[1]);
-	b_color = md_atoi(rgb[2]);
-	if (r_color > 255 || g_color > 255 || b_color > 255)
-		return (write(2, "The number must be between 0-255\n", 33), 0);
-	//continue work about converting from rgb to hexadecimal
-	return (0);
-}
-
-int	parse_rgb(char *line)
-{
-	int comma;
-	char	*str;
-	int len_color;
-	int i;
-
-	comma = 0;
-	len_color = 0;
-	i = 1;
-	str = NULL;
-	if (!md_strncmp(line, "F", 1) || !md_strncmp(line, "C", 1))
-	{
-		while (line[i] == ' ')
-			i++;
-		if (!md_isdigit(line[i]))
-			return (write(2, "Error\nNeed digits\n", 18), 0);
-		str = ft_strdup(line + i);
-		while (md_isdigit(line[i]) || md_isalpha(line[i]))
-		{
-			if (md_isalpha(line[i]))
-				return (free(str), write(2, "Error\nNeed digits\n", 18), 0);
-			i++;
-			len_color++;
-		}
-		while (line[i])
-		{
-			if ((line[i] == ',' && md_isdigit(line[i - 1]) && md_isdigit(line[i + 1])) || (line[i] == ',' && line[i + 1] == '\0'))
-				comma++;
-			if (comma > 2)
-				return (free(str), write(2, "Error\nSyntax error of rgb(0,0,0)\n", 33), 0);
-			i++;
-			len_color++;
-		}
-		if (comma != 2)
-			return (free(str), write(2, "Error\nSyntax error of rgb(0,0,0)\n", 33), 0);
-	}
-	return (convert_to_hex(str));
-}
-
-
 int	load_file(t_data *data, int fd)
 {
 	char *line;
@@ -168,31 +90,31 @@ int	load_file(t_data *data, int fd)
         if (!line)
             break ;
 		if (md_strncmp(line, "NO", 2) == 0)
-			data->no_map.value = parse_direction(line);
+			data->no_map = line;
 		else if (md_strncmp(line, "SO", 2) == 0)
-			data->so_map.value = parse_direction(line);
+			data->so_map = line;
 		else if (md_strncmp(line, "WE", 2) == 0)
-			data->we_map.value = parse_direction(line);
+			data->we_map = line;
 		else if (md_strncmp(line, "EA", 2) == 0)
-			data->ea_map.value = parse_direction(line);
+			data->ea_map = line;
 		else if (md_strncmp(line, "F", 1) == 0)
-			data->f_color = 8;
+			data->f_color = line;
 		else if (md_strncmp(line, "C", 1) == 0)
-			data->c_color = 6;
+			data->c_color = line;
 		else if (md_strchr(line, '1') || md_strchr(line, '0') || md_strchr(line, 'N') || md_strchr(line, 'S') || md_strchr(line, 'E') || md_strchr(line, 'W'))
 		{
 			if (order != 7)
-				return (free(line), write(2, "Error\nOrder Problem !\n", 22), 1);
+				return (write(2, "Error\nOrder Problem !\n", 22), 1);
 			data->map[i] = malloc(ft_strlen(line));
 			data->map[i] = md_strtrim(line, "\n");
 			i++;
 		}
 		if (line[0] != '\n' && (!data->map[0]))
 			order++;
-		free(line);
+		// free(line);
 	}
 	data->map[i] = NULL;
-	if (!data->no_map.value || !data->so_map.value || !data->we_map.value || !data->ea_map.value || !data->f_color || !data->c_color || !data->map[0])
+	if (!data->no_map || !data->so_map || !data->we_map || !data->ea_map || !data->f_color || !data->c_color || !data->map[0])
 		return (free_str(data->map), write(2, "Error\nNeed more categories\n", 27), 1);
     return (0);
 }

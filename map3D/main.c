@@ -6,7 +6,7 @@
 /*   By: mradouan <mradouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 10:38:30 by ybahmaz           #+#    #+#             */
-/*   Updated: 2025/07/30 17:52:36 by mradouan         ###   ########.fr       */
+/*   Updated: 2025/08/01 10:18:11 by mradouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	get_positions(t_player *player, char c, int i, int j)
 	}
 }
 
-void	init_map(char **map, t_data *data)
+void	init_map(t_data *data)
 {
 	int	i;
 	int	j;
@@ -75,19 +75,17 @@ void	init_map(char **map, t_data *data)
 
 	i = 0;
 	n = 0;
-	while (map[i])
+	while (data->map[i])
 	{
-		data->w_map = ft_strlen(map[i]);
 		j = 0;
-		while (map[i][j] && !n)
+		while (data->map[i][j] && !n)
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
-				(get_positions(data->player, map[i][j], i, j), n = 1);
+			if (data->map[i][j] == 'N' || data->map[i][j] == 'S' || data->map[i][j] == 'W' || data->map[i][j] == 'E')
+				(get_positions(data->player, data->map[i][j], i, j), n = 1);
 			j++;
 		}
 		i++;
 	}
-	data->h_map = i;
 	reset_ray_face(data->player);
 }
 
@@ -105,42 +103,29 @@ int	create_new_img(t_data *data, t_image *image)
 int	main(int ac, char **av)
 {
 	t_data	data;
-	char	*map[] = {
-		"11111111111111111111111111111111",
-		"10000000000000000000000000000001",
-		"10000000000000000000010000000001",
-		"10000000001000000000000000000001",
-		"10001000010000000000010000000001",
-		"10001000000000000000000000000001",
-		"100010000000000000N0010010000001",
-		"10000000000000000000000000000001",
-		"10000000000000000000000000000001",
-		"10000000000000000000000000000001",
-		"10000000000000000000000000000001",
-		"10000000000000000000000000000001",
-		"10000000000000000000000000000001",
-		"10000000000000000000000000000001",
-		"10000000000000000000000000000001",
-		"11111111111111111111111111111111",
-		NULL
-	};
 	if (ac != 2)
 		return (write(2, "Should be two arguments\n", 24), 1);
 	data.player = (t_player []){{}};
 	data.image = (t_image []){{}};
 	data.w_map = 0;
 	data.h_map = 0;
+	data.no_map.value = NULL;
+	data.so_map.value = NULL;
+	data.ea_map.value = NULL;
+	data.we_map.value = NULL;
 	data.h_dist = -1;
 	data.v_dist = -1;
 	
-	if (parsing_file(&data, av[1]) == 1);
+	if (parsing_file(&data, av[1]) == 1)
 		return (1);
-	init_map(map, &data);
-	data.map = malloc(sizeof(char *) * (data.h_map + 1));
-	if (!data.map)
-		return (1);
-	if (!ft_read_file(&data, av[1]))
-		return (1);
+	printf("%s", data.no_map.value);
+	printf("%s", data.so_map.value);
+	printf("%s", data.ea_map.value);
+	printf("%s", data.we_map.value);
+	for(int i=0;i<data.h_map;i++){
+		printf("%s", data.map[i]);
+	}
+	init_map(&data);
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		return (1);

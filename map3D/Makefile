@@ -1,14 +1,12 @@
 NAME = cub3D
 
-FLAG = -Wextra -Werror -Wall# -fsanitize=address -g
+FLAG = -Wextra -Werror -Wall #-fsanitize=address -g
 
 MLX = -lmlx -framework OpenGL -framework AppKit
 
 SRC = \
 	main.c \
-	ft_read_file.c \
 	ft_clean_all.c \
-	ft_strndup.c \
 	get_next_line.c \
 	get_next_line_utils.c \
 	ft_draw_map.c \
@@ -17,6 +15,8 @@ SRC = \
 	raycasting_phase.c \
 	parsing_map.c \
 	free_resourses.c \
+	utils_func.c \
+	utils_splite.c \
 
 OBJ = $(SRC:.c=.o)
 

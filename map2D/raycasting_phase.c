@@ -6,7 +6,7 @@
 /*   By: ybahmaz <ybahmaz@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 14:18:17 by ybahmaz           #+#    #+#             */
-/*   Updated: 2025/07/30 14:16:41 by ybahmaz          ###   ########.fr       */
+/*   Updated: 2025/07/31 13:32:21 by ybahmaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,15 +136,15 @@ void	raycasting_phase(t_data *data, t_player *player, float angle)
 		}
 		//*	draw rays -----------------------------------
 		int j = 0;
-		if (i == WIDTH/2)
-		{
+		// if (i == WIDTH/2)
+		// {
 		// 	printf("angle = %f\n", ray_angle);
 			while (j < data->dist_rays[i])
 			{
 				ft_put_pixel(data->image, 0xff0000, data->player->pos.x + cosf(ray_angle) * j, data->player->pos.y + sinf(ray_angle) * j);
 				j++;
 			}
-		}
+		// }
 		//*	______________________________________________
 		i++;
 	}

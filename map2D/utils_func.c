@@ -6,34 +6,13 @@
 /*   By: mradouan <mradouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 17:15:22 by mradouan          #+#    #+#             */
-/*   Updated: 2025/08/01 10:13:07 by mradouan         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:19:38 by mradouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	md_isalpha(int c)
-{
-	int		i;
-
-	i = 0;
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-	{
-		return (1);
-	}
-	return (0);
-}
-
-int	md_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-	{
-		return (1);
-	}
-	return (0);
-}
-
-size_t	md_strlcpy(char *dst, const char *src, size_t dstsize)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
 
@@ -91,7 +70,7 @@ char	*md_strtrim(char *s1, char *set)
 	trim_s = (char *)malloc((len_s + 1) * sizeof(char));
 	if (!trim_s)
 		return (NULL);
-	md_strlcpy(trim_s, (char *)s1, len_s + 1);
+	ft_strlcpy(trim_s, (char *)s1, len_s + 1);
 	return (trim_s);
 }
 
@@ -120,52 +99,4 @@ int	md_strchr(const char *s, int c)
 	if ((unsigned char)c == '\0')
 		return (0);
 	return (0);
-}
-
-int	ft_putchar(char c)
-{
-	write(1, &c, 1);
-	return (1);
-}
-
-int	ft_puthex(unsigned long num, char *base)
-{
-	int		count;
-
-	count = 0;
-	if (num >= 16)
-	{
-		count += ft_puthex(num / 16, base);
-		count += ft_puthex(num % 16, base);
-	}
-	else
-		count += ft_putchar(base[num]);
-	return (count);
-}
-
-long	md_atoi(const char *str)
-{
-	int		i;
-	int		sign;
-	long	t;
-
-	i = 0;
-	sign = 1;
-	t = 0;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
-	}
-	while (str[i] <= '9' && str[i] >= '0')
-	{
-		t = t * 10 + (str[i] - 48);
-		if (t > 2147483648)
-			return (2147483648);
-		i++;
-	}
-	return (t * sign);
 }

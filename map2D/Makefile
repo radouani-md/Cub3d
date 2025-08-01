@@ -6,14 +6,15 @@ MLX = -lmlx -framework OpenGL -framework AppKit
 
 SRC = \
 	main.c \
-	ft_read_file.c \
 	ft_clean_all.c \
-	ft_strndup.c \
 	get_next_line.c \
 	get_next_line_utils.c \
 	ft_draw_map.c \
 	move_player.c \
-	raycasting_phase.c
+	raycasting_phase.c \
+	parsing_map.c \
+	free_resourses.c \
+	utils_func.c \
 
 OBJ = $(SRC:.c=.o)
 

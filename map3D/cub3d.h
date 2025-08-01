@@ -6,7 +6,7 @@
 /*   By: mradouan <mradouan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 10:32:05 by ybahmaz           #+#    #+#             */
-/*   Updated: 2025/07/30 19:48:27 by mradouan         ###   ########.fr       */
+/*   Updated: 2025/08/01 10:05:17 by mradouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define PI 3.14159265
 # define PLAYER_RADIUS 6
 # define ESC 53
-# define P_SPEED 16	//*	player speed
+# define P_SPEED 36	//*	player speed
 # define ROT_SPEED 0.05	//*	rotate speed
 # define SIZE 64
 # define UP 13
@@ -45,6 +45,7 @@ typedef struct s_image
 {
 	void	*img;
 	char	*addr;
+	char	*value;
 	int		bpp;	//*	bit_per_pixel
 	int		l_size;
 }	t_image;
@@ -72,12 +73,12 @@ typedef struct s_data
 	char		**map;
 	int			w_map;
 	int			h_map;
-	char		*no_map;
-	char		*so_map;
-	char		*we_map;
-	char		*ea_map;
-	char		*f_color;
-	char		*c_color;
+	t_image		no_map;
+	t_image		so_map;
+	t_image		we_map;
+	t_image		ea_map;
+	int			f_color;
+	int			c_color;
 	int			add_x;
 	int			add_y;
 	float		h_dist;
@@ -88,8 +89,6 @@ typedef struct s_data
 	int			color[WIDTH];
 }	t_data;
 
-int		ft_read_file(t_data *data, char *file);
-char	*ft_strndup(char *str, int size);
 char	*get_next_line(int fd);
 char	*ft_strchr(char *str);
 char	*ft_strjoin(char *line, char *buff);
@@ -107,9 +106,18 @@ float	normalize_angle(float angle);
 
 //                         MOHA FUNCTIONS
 
-int		parsing_file(t_data *data, char file_name);
+int		parsing_file(t_data *data, char *file_name);
+char	*parse_direction(char *line);
+int		parse_rgb(char *line);
+char	**md_split(char const *s, char c);
 int		md_strncmp(const char *s1, const char *s2, size_t n);
+size_t	md_strlcpy(char *dst, const char *src, size_t dstsize);
+char	*md_strtrim(char *s1, char *set);
 int		md_strchr(const char *s, int c);
+int		md_isdigit(int c);
+int		md_isalpha(int c);
+long	md_atoi(const char *str);
+int		ft_puthex(unsigned long num, char *base);
 void	free_str(char **str);
 
 #endif
