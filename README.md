@@ -104,19 +104,12 @@ Manage event-driven programming
 
 Improve code organization, error handling, and memory management
 
-👨‍💻 Author
-Your Name - Your GitHub
+👨‍💻 Authors
+Mohammed Radouani
+youssef bahmaz
+
 
 Project developed at 42 Network
 
 📄 License
 This project is for educational purposes as part of the 42 curriculum and follows fair use principles for any referenced material.
-
-
----
-
-### ✅ Tips:
-- Make sure you update the `Author`, `License`, and screenshot paths (`./screenshots/mandatory.png`) if you use actual images in your repo.
-- Include your `.cub` test maps and a `maps/` folder if you want to provide examples.
-- If you implemented any bonuses, list them clearly with checkboxes.
-
